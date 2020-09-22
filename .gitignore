@@ -6,6 +6,7 @@
 *.swp
 # dirs
 bin/
+dist/
 buildout-cache/
 develop-eggs/
 eggs/
