@@ -7,6 +7,7 @@ and Cellular Characterization of Screen-Detected Lesions.
 Main entrypoint.
 '''
 
+from . import VERSION
 from .resources import Root
 from .utils import AppStats, Directory, Database
 from .interfaces import IDirectory
@@ -36,6 +37,9 @@ def _parseArgs():
     parser = argparse.ArgumentParser(
         description='🏥 Infirmary: an API for Clinical Data for the Consortium for Molecular and Cellular Characterization of Screen-Detected Lesions',
     )
+
+    # Basics
+    parser.add_argument('--version', action='version', version=f'%(prog)s {VERSION}')
 
     # Handle logging
     group = parser.add_mutually_exclusive_group()
@@ -67,6 +71,7 @@ def _parseArgs():
 def main():
     args = _parseArgs()
     logging.basicConfig(level=args.loglevel)
+    _logger.info('🏥 Infirmary version %s', VERSION)
     config = Configurator(registry=getGlobalSiteManager(), root_factory=Root)
     config.setup_registry()
     config.set_authentication_policy(BasicAuthAuthenticationPolicy(_checkCredentials))

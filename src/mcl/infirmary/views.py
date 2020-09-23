@@ -8,6 +8,8 @@ Views.
 '''
 
 
+from . import VERSION
+from mcl.sickbay import VERSION as SICKBAY_VERSION
 from .interfaces import IAppStats, IDatabase
 from mcl.sickbay.model import ClinicalCore, Organ, Biospecimen, Genomics, Imaging
 from mcl.sickbay.json import ClinicalCoreEncoder, ORGAN_ENCODERS, BiospecimenEncoder, GENOMICS_ENCODERS, ImagingEncoder
@@ -25,7 +27,12 @@ class PingView(object):
     @view_config(route_name='ping', renderer='json')
     def __call__(self):
         stats = getUtility(IAppStats)
-        return {'uptime': stats.getUptime(), 'program': stats.getProgramName()}
+        return {
+            'uptime': stats.getUptime(),
+            'program': stats.getProgramName(),
+            'version': VERSION,
+            'sickbay': SICKBAY_VERSION,
+        }
 
 
 class ProtectedGreetingView(object):
