@@ -8,9 +8,9 @@ Main entrypoint.
 '''
 
 from . import VERSION
+from .interfaces import IDirectory
 from .resources import Root
 from .utils import AppStats, Directory, Database
-from .interfaces import IDirectory
 from pyramid.authentication import BasicAuthAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.config import Configurator
@@ -18,13 +18,13 @@ from wsgiref.simple_server import make_server
 from zope.component import getGlobalSiteManager, provideUtility, getUtility
 import logging, os, argparse, sys
 
-_logger = logging.getLogger(__name__)
-
+_logger     = logging.getLogger(__name__)
 _ldapServer = 'ldaps://edrn-ds.jpl.nasa.gov'
-_dbURI = 'postgresql://mcl:mcl@localhost/clinical_data'
+_dbURI      = 'postgresql://mcl:mcl@localhost/clinical_data'
 
 
 def _checkCredentials(username, password, request):
+    '''See if the given ``username`` and ``password`` check out. The ``request`` is ignored.'''
     directory = getUtility(IDirectory)
     if directory.authenticate(username, password):
         return []  # This empty list indicates the user is logged in
@@ -69,6 +69,7 @@ def _parseArgs():
 
 
 def main():
+    '''Start the infirmary server'''
     args = _parseArgs()
     logging.basicConfig(level=args.loglevel)
     _logger.info('🏥 Infirmary version %s', VERSION)
@@ -89,12 +90,9 @@ def main():
     config.add_route('images', '/images', factory=Root)
     config.add_route('image', '/images/{identifier}', factory=Root)
     config.scan()
-    appStats = AppStats(sys.argv[0])
-    provideUtility(appStats)
-    directory = Directory(args.ldap_server)
-    provideUtility(directory)
-    database = Database(args.database)
-    provideUtility(database)
+    provideUtility(AppStats(sys.argv[0]))
+    provideUtility(Directory(args.ldap_server))
+    provideUtility(Database(args.database))
     app = config.make_wsgi_app()
     server = make_server('0.0.0.0', 8080, app)
     _logger.debug('🏃‍♀️ Starting server')
