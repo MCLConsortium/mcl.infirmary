@@ -25,11 +25,11 @@ COPY setup.cfg setup.py ./
 COPY src/ ./src
 
 RUN : \
-    apk update &&\
-    apk add --virtual /build gcc musl-dev postgresql-dev openldap-dev &&\
-    apk add libldap libpq &&\
+    apk update --quiet --no-progress &&\
+    apk add --quiet --no-progress --virtual /build gcc musl-dev postgresql-dev openldap-dev &&\
+    apk add --quiet --no-progress libldap libpq &&\
     python3 setup.py install &&\
-    apk del /build &&\
+    apk del --quiet /build &&\
     rm -rf src setup.cfg setup.py build dist &&\
     rm -rf /var/cache/apk/* &&\
     : /
