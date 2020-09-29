@@ -9,6 +9,8 @@ Here we track the changes from release to release.
     -   Adds version (and [Sickbay](https://pypi.org/project/mcl.sickbay/) version) to the `/ping` endpoint
     -   Add `--version` command-line option
     -   Announces the version to the `info` log at start-up
+-   Updates [mcl.sickbay](https://pypi.org/project/mcl.sickbay/) dependency to 0.0.6
+    -   Takes advantage of new consortium and protocol ID data
 
 
 ### 0.0.1
