@@ -2,6 +2,10 @@
 
 Here we track the changes from release to release.
 
+### 0.0.3
+
+This release upgrades [Sickbay](https://pypi.org/project/mcl.sickbay/) to 0.0.7; see issue https://github.com/MCLConsortium/mcl.infirmary/issues/2.
+
 
 ### 0.0.2
 
