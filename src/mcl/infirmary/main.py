@@ -11,6 +11,7 @@ from . import VERSION
 from .interfaces import IDirectory
 from .resources import Root
 from .utils import AppStats, Directory, Database
+from pyramid.events import NewRequest
 from pyramid.authentication import BasicAuthAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.config import Configurator
@@ -21,6 +22,13 @@ import logging, os, argparse, sys
 _logger     = logging.getLogger(__name__)
 _ldapServer = 'ldaps://edrn-ds.jpl.nasa.gov'
 _dbURI      = 'postgresql://mcl:mcl@localhost/clinical_data'
+_origins    = [
+    'https://labcas-dev.jpl.nasa.gov/',
+    'https://mcl-labcas.jpl.nasa.gov/',
+    'https://mcl-new.jpl.nasa.gov/',
+    'https://mcl.jpl.nasa.gov',
+    'https://mcl.nci.nih.gov',
+]
 
 
 def _checkCredentials(username, password, request):
@@ -40,6 +48,7 @@ def _parseArgs():
 
     # Basics
     parser.add_argument('--version', action='version', version=f'%(prog)s {VERSION}')
+    parser.add_argument('-p', '--port', default=8080, type=int, help='Listen port (%(default)d)')
 
     # Handle logging
     group = parser.add_mutually_exclusive_group()
@@ -68,6 +77,18 @@ def _parseArgs():
     return parser.parse_args()
 
 
+def cors_callback(event):
+    def cors_headers(request, response):
+        response.headers.update({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST,GET,DELETE,PUT,OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
+            'Access-Control-Allow-Credentials': 'true',
+            'Access-Control-Max-Age': '1728000',
+        })
+    event.request.add_response_callback(cors_headers)
+
+
 def main():
     '''Start the infirmary server'''
     args = _parseArgs()
@@ -89,13 +110,14 @@ def main():
     config.add_route('genomic', '/genomics/{specimen_ID}', factory=Root)
     config.add_route('images', '/images', factory=Root)
     config.add_route('image', '/images/{identifier}', factory=Root)
+    config.add_subscriber(cors_callback, NewRequest)
     config.scan()
     provideUtility(AppStats(sys.argv[0]))
     provideUtility(Directory(args.ldap_server))
     provideUtility(Database(args.database))
     app = config.make_wsgi_app()
-    server = make_server('0.0.0.0', 8080, app)
-    _logger.debug('🏃‍♀️ Starting server')
+    _logger.debug('🏃‍♀️ Starting server on port %d', args.port)
+    server = make_server('0.0.0.0', args.port, app)
     server.serve_forever()
 
 

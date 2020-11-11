@@ -23,7 +23,7 @@ class AppStats(object):
         '''Initialize the stats with the given ``programName`` and record a starting timestamp'''
         # Get the current UTC time and drop timezone info
         ts = datetime.utcnow()
-        self.start = datetime(ts.year, ts.month, ts.day, ts.hour, ts.minute, ts.second, microsecond=0, tzinfo=None)
+        self.start       = datetime(ts.year, ts.month, ts.day, ts.hour, ts.minute, ts.second, microsecond=0, tzinfo=None)
         self.programName = programName
 
     def getUptime(self):
@@ -36,6 +36,10 @@ class AppStats(object):
     def getProgramName(self):
         '''See interface docs'''
         return self.programName
+
+    def getOrigins(self):
+        '''See interface docs'''
+        return self.origins
 
 
 @implementer(IDirectory)

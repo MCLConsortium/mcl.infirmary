@@ -24,7 +24,7 @@ WORKDIR /usr/src/infirmary
 COPY setup.cfg setup.py ./
 COPY src/ ./src
 
-RUN : \
+RUN : &&\
     apk update --quiet --no-progress &&\
     apk add --quiet --no-progress --virtual /build gcc musl-dev postgresql-dev openldap-dev &&\
     apk add --quiet --no-progress libldap libpq &&\

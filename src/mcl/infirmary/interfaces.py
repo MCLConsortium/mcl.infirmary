@@ -19,6 +19,9 @@ class IAppStats(Interface):
     def getProgramName():
         '''Get my invocation program name, typically argv[0]'''
 
+    def getAllowedOrigins():
+        '''Return a sequence of allowed origin URLs for CORS'''
+
 
 class IDirectory(Interface):
     '''Directory interface'''
