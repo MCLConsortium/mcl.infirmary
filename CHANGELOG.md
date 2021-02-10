@@ -3,6 +3,11 @@
 Here we track the changes from release to release.
 
 
+### 0.0.6
+
+This release upgrades [Sickbay](https://pypi.org/project/mcl.sickbay/) to 1.0.0.
+
+
 ### 0.0.5
 
 This release upgrades [Sickbay](https://pypi.org/project/mcl.sickbay/) to 0.0.10.
