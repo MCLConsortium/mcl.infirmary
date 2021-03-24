@@ -3,6 +3,11 @@
 Here we track the changes from release to release.
 
 
+### 1.0.0
+
+This release adds a handler for `/` which apparently is required for [JPL](https://www.jpl.nasa.gov/) to complete its security scan.
+
+
 ### 0.0.6
 
 This release upgrades [Sickbay](https://pypi.org/project/mcl.sickbay/) to 1.0.0.

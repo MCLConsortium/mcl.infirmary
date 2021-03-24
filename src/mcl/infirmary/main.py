@@ -98,6 +98,7 @@ def main():
     config.setup_registry()
     config.set_authentication_policy(BasicAuthAuthenticationPolicy(_checkCredentials))
     config.set_authorization_policy(ACLAuthorizationPolicy())
+    config.add_route('home', '/')
     config.add_route('ping', '/ping')
     config.add_route('hello', '/hello/{name}', factory=Root)
     config.add_route('clinicalCores', '/clinicalCores', factory=Root)

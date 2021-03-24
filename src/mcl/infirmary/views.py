@@ -9,16 +9,41 @@ Views.
 
 
 from . import VERSION
-from mcl.sickbay import VERSION as SICKBAY_VERSION
 from .interfaces import IAppStats, IDatabase
-from mcl.sickbay.model import ClinicalCore, Organ, Biospecimen, Genomics, Imaging
+from mcl.sickbay import VERSION as SICKBAY_VERSION
 from mcl.sickbay.json import ClinicalCoreEncoder, ORGAN_ENCODERS, BiospecimenEncoder, GENOMICS_ENCODERS, ImagingEncoder
+from mcl.sickbay.model import ClinicalCore, Organ, Biospecimen, Genomics, Imaging
 from pyramid.httpexceptions import HTTPUnauthorized, HTTPForbidden, HTTPNotFound
+from pyramid.response import Response
 from pyramid.security import forget
 from pyramid.view import forbidden_view_config
 from pyramid.view import view_config
 from sqlalchemy.orm.exc import NoResultFound
 from zope.component import getUtility
+
+
+class HomeView(object):
+    '''A view for `/` which is apparently required by JPL security.'''
+    def __init__(self, request):
+        self.request = request
+
+    @view_config(route_name='home')
+    def __call__(self):
+        return Response(body='''
+            <html>
+                <head>
+                    <title>Infirmary</title>
+                </head>
+                <body>
+                    <h1>🏥 Infirmary</h1>
+                    <p>
+                        Welcome to <em>Infirmary</em>, the ReST-based API for clinical data for the
+                        Consortium for Molecular and Cellular Characterization of Screen-Detected Lesions,
+                        developed by the Informatics Center at the Jet Propulsion Laboratory.
+                    </p>
+                </body>
+            </html>
+        ''')
 
 
 class PingView(object):
