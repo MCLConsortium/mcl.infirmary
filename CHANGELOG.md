@@ -3,6 +3,11 @@
 Here we track the changes from release to release.
 
 
+### 1.0.1
+
+This release updates [Sickbay](https://pypi.org/project/mcl.sickbay/) to 1.0.1 and is used in the v2 API endpoint.
+
+
 ### 1.0.0
 
 This release adds a handler for `/` which apparently is required for [JPL](https://www.jpl.nasa.gov/) to complete its security scan.

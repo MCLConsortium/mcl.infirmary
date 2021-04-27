@@ -9,7 +9,8 @@
             "*.egg-info",
             "parts",
             "var",
-            "__pycache__"
+            "__pycache__",
+            "venv"
          ],
          "path" : ".",
          "file_exclude_patterns" : [
