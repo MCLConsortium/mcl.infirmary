@@ -12,9 +12,9 @@ FROM python:3.8.5-alpine3.12
 
 LABEL "org.label-schema.name"="🏥 MCL Infirmary"
 LABEL "org.label-schema.description"="🏥 Infirmary: an API for Clinical Data for the Consortium for Molecular and Cellular Characterization of Screen-Detected Lesions"
-LABEL "org.label-schema.version"="0.0.0"
+LABEL "org.label-schema.version"="1.1.0"
 LABEL "org.label-schema.schema-version"="1.0"
-LABEL "org.label-schema.docker.cmd"="docker container run --rm --detach --publish 6543:6543 mcl-infirmary"
+LABEL "org.label-schema.docker.cmd"="docker container run --rm --detach --publish 6543:8080 mcl-infirmary"
 
 
 # Application

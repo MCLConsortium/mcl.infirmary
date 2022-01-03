@@ -28,15 +28,14 @@ For those endpoints where the "Auth" column is dispays 🔐, you must provide an
 ## 🔧 Development
 
 To develop locally with a local Postgres database:
-
 ```console
-python3 bootstrap.py
-bin/buildout
-bin/infirmary --debug
+python3 -m venv venv
+venv/bin/pip install --quiet --upgrade setuptools pip wheel build
+venv/bin/pip install --editable '.[dev]'
+venv/bin/infirmary --debug
 ```
 
 To create and register the image:
-
 ```console
 docker image build --tag mcl-infirmary:latest .
 docker image tag mcl-infirmary:latest nutjob4life/mcl-infirmary:latest
