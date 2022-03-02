@@ -3,6 +3,11 @@
 Here we track the changes from release to release.
 
 
+### 1.2.0
+
+This release updates [Sickbay](https://pypi.org/project/mcl.sickbay/) to 1.2.0.
+
+
 ### 1.1.0
 
 This release updates [Sickbay](https://pypi.org/project/mcl.sickbay/) to 1.1.0 and also removes the last vestiges of [zc.buildout](https://www.buildout.org/).
