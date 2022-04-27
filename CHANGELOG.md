@@ -2,6 +2,11 @@
 
 Here we track the changes from release to release.
 
+### 1.2.2
+
+This release updates [Sickbay](https://pypi.org/project/mcl.sickbay/) to 1.2.2.
+
+
 ### 1.2.1
 
 This release updates [Sickbay](https://pypi.org/project/mcl.sickbay/) to 1.2.1.
