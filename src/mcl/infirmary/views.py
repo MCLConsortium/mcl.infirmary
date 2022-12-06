@@ -30,16 +30,24 @@ class HomeView(object):
     @view_config(route_name='home')
     def __call__(self):
         return Response(body='''
-            <html>
+            <!DOCTYPE html>
+            <html lang='en'>
                 <head>
                     <title>Infirmary</title>
+                    <meta charset='utf-8'/>
+                    <meta name='description' content='This is a ReST API and is not worth indexing.'/>
                 </head>
                 <body>
                     <h1>🏥 Infirmary</h1>
                     <p>
                         Welcome to <em>Infirmary</em>, the ReST-based API for clinical data for the
                         Consortium for Molecular and Cellular Characterization of Screen-Detected Lesions,
-                        developed by the Informatics Center at the Jet Propulsion Laboratory.
+                        developed by the Informatics Center at the
+                        <a href='https://www.jpl.nasa.gov/'>Jet Propulsion Laboratory</a>.
+                    </p>
+                    <p>
+                        There is no other content here. You are viewing a short description page about a
+                        ReST API.
                     </p>
                 </body>
             </html>
