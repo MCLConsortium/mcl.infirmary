@@ -38,9 +38,9 @@ venv/bin/infirmary --debug
 To create and register the image:
 ```console
 docker image build --tag mcl-infirmary:latest .
-docker image tag mcl-infirmary:latest nutjob4life/mcl-infirmary:latest
+docker image tag mcl-infirmary:latest edrndocker/mcl-infirmary:latest
 docker login
-docker image push nutjob4life/mcl-infirmary:latest
+docker image push edrndocker/mcl-infirmary:latest
 ```
 
 To explore the image:
